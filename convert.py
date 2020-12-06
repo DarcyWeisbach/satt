@@ -13,7 +13,7 @@ def convert(array,theta,scale=1.0):
     array_divide = np.array_split(array_sum,5)
     array_select = np.array([np.sum(array_divide[i]) for i in range(5)])
     array_index = array_select.index(max(array_select))
-    print array_index/5
+    return  array_index/4
 
 
 
