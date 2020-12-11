@@ -51,14 +51,15 @@ def capture(i):
     num = np.count_nonzero(mono_src)
     #画像を保存する関数，引数は保存する名前になる
     cv2.imwrite("./hattorik/"+str(i)+".jpg", mono_src)
-    #終了判定
-    scale = num/3200/2400
+    return mono_src
+
+def judge(array):
+    num=np.count_nonzero(array)
+    scal=num/3200/2400
     if scale >= 0.8:
         bi = True
     else:
         bi = False
-
-    return mono_src, bi
 
   """
     この関数は0~1の場所を返す関数です．途中で画像の保存などもしています．
@@ -112,8 +113,9 @@ if __name__ == '__main__':
     with open("./data.csv", "w") as f:
         writer = csv.writer(f, lineterminator='\n')
         for i in range(1, 25, 1):
-            array, judge = capture(i)
-            if judge == True:
+            array = capture(i)
+            judgement=judge(array)
+            if judgement == True:
                 print("finish")
             select = convert(array, 0)
             writer.writerow([i, select])
